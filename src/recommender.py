@@ -6,7 +6,6 @@ from dataclasses import dataclass
 class Song:
     """
     Represents a song and its attributes.
-    Required by tests/test_recommender.py
     """
     id: int
     title: str
@@ -23,7 +22,6 @@ class Song:
 class UserProfile:
     """
     Represents a user's taste preferences.
-    Required by tests/test_recommender.py
     """
     favorite_genre: str
     favorite_mood: str
@@ -33,16 +31,18 @@ class UserProfile:
 class Recommender:
     """
     OOP implementation of the recommendation logic.
-    Required by tests/test_recommender.py
     """
     def __init__(self, songs: List[Song]):
+        """Store the catalog of songs this recommender will rank."""
         self.songs = songs
 
     def recommend(self, user: UserProfile, k: int = 5) -> List[Song]:
+        """Return the top k songs for the given user profile."""
         # TODO: Implement recommendation logic
         return self.songs[:k]
 
     def explain_recommendation(self, user: UserProfile, song: Song) -> str:
+        """Return a human-readable explanation of why a song was recommended."""
         # TODO: Implement explanation logic
         return "Explanation placeholder"
 
