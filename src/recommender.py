@@ -67,19 +67,39 @@ def load_songs(csv_path: str) -> List[Dict]:
     return songs
 
 def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
-    """
-    Scores a single song against user preferences.
-    Required by recommend_songs() and src/main.py
-    """
-    # TODO: Implement scoring logic using your Algorithm Recipe from Phase 2.
-    # Expected return format: (score, reasons)
-    return []
+    """Score one song against user preferences; return (score, reasons)."""
+    score = 0.0
+    reasons = []
+
+    # Genre: strongest signal, worth +2.0
+    if song["genre"] == user_prefs["favorite_genre"]:
+        score += 2.0
+        reasons.append(f"+2.0 genre match ({song['genre']})")
+
+    # Mood: worth +1.0
+    if song["mood"] == user_prefs["favorite_mood"]:
+        score += 1.0
+        reasons.append(f"+1.0 mood match ({song['mood']})")
+
+    # Energy: similarity from 0 to 1, higher when energies are close
+    similarity = 1 - abs(user_prefs["target_energy"] - song["energy"])
+    score += similarity
+    reasons.append(f"+{similarity:.2f} energy match")
+
+    # Acoustic bonus: only when the user asks for it and the song is highly acoustic
+    if user_prefs["likes_acoustic"] and song["acousticness"] > 0.6:
+        score += 0.5
+        reasons.append("+0.5 acoustic bonus")
+
+    return (score, reasons)
 
 def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, str]]:
-    """
-    Functional implementation of the recommendation logic.
-    Required by src/main.py
-    """
-    # TODO: Implement scoring and ranking logic
-    # Expected return format: (song_dict, score, explanation)
-    return []
+    """Score every song, rank by score descending, and return the top k as (song, score, explanation)."""
+    results: List[Tuple[Dict, float, str]] = []
+    for song in songs:
+        score, reasons = score_song(user_prefs, song)
+        explanation = "; ".join(reasons) if isinstance(reasons, list) else str(reasons)
+        results.append((song, score, explanation))
+
+    results.sort(key=lambda result: result[1], reverse=True)
+    return results[:k]
