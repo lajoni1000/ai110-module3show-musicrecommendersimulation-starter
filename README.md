@@ -296,11 +296,43 @@ Profile:
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+### Experiment 1: Weight Shift
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+To evaluate how sensitive the recommender was to different scoring weights, I temporarily changed the scoring algorithm in `recommender.py`.
+
+**Original weights:**
+- Genre match: +2.0
+- Mood match: +1.0
+- Energy similarity: up to +1.0
+- Acoustic bonus: +0.5
+
+**Experimental weights:**
+- Genre match: +1.0
+- Mood match: +1.0
+- Energy similarity: up to +2.0
+- Acoustic bonus: +0.5
+
+#### Results
+
+The experiment showed that increasing the importance of energy made songs with similar energy levels much more competitive, even if they did not match the requested genre.
+
+For example, in the **High-Energy EDM** profile, the top recommendation ("Voltage Rising") remained the same because it perfectly matched the user's genre, mood, and energy preferences. However, songs that matched only the target energy nearly doubled their scores, moving much closer to the top recommendation.
+
+The biggest change occurred in the **Metal / Happy** adversarial profile. Before the experiment, the metal song ranked clearly above the happy pop song because genre was weighted twice as much as mood. After reducing the genre weight and increasing the energy weight, both songs received the same overall score (2.84), showing that the recommender became much more sensitive to energy similarity.
+
+### Behavior for Different User Types
+
+The recommender behaved differently depending on the user's preferences:
+
+- **High-Energy EDM:** Recommended energetic EDM songs first, with other high-energy songs following.
+- **Low-Energy Lofi:** Favored calm, acoustic songs that matched the requested genre and mood.
+- **R&B Romantic:** Found one perfect match, then recommended songs with similar energy because there were fewer songs matching both the requested genre and mood.
+- **Conflicting Metal/Happy:** Demonstrated how changing the scoring weights affected the balance between genre and mood.
+- **Edge Case (Energy = 1.5):** The recommender still produced recommendations even though the energy value was outside the expected range (0.0–1.0), revealing that the current implementation does not validate user input.
+
+### Conclusion
+
+The experiment demonstrated that the recommender is sensitive to feature weights. Increasing the influence of energy changed the ranking of several songs and made energy-only matches more competitive. However, the changes made the recommendations different rather than clearly more accurate. This experiment helped illustrate how weighting decisions affect recommendation behavior.
 
 ---
 
