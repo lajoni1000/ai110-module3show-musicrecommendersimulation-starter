@@ -120,38 +120,178 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Sample Recommendation Output
 
-TOP MUSIC RECOMMENDATIONS
+.venv) PS C:\Users\hanny\OneDrive\Documentos\Foundations of AI Engineering\ai110-module3show-musicrecommendersimulation-starter> python -m src.main                                                    
+
+============================================================
+PROFILE: 1. High-energy (aligned preferences)
+============================================================
+Profile:
+  Favorite Genre: edm
+  Favorite Mood: uplifting
+  Target Energy: 0.95
+  Likes Acoustic: NO
+
+  1. Voltage Rising - Pulsewave
+     Score: 4.00
+       - +2.0 genre match (edm)
+       - +1.0 mood match (uplifting)
+       - +1.00 energy match
+
+  2. Gym Hero - Max Pulse
+     Score: 0.98
+       - +0.98 energy match
+
+  3. Iron Verdict - Ashen Crown
+     Score: 0.97
+       - +0.97 energy match
+
+  4. Storm Runner - Voltline
+     Score: 0.96
+       - +0.96 energy match
+
+  5. Midnight Circuit - Bassline Ghost
+     Score: 0.95
+       - +0.95 energy match
+
+
+============================================================
+PROFILE: 2. Low-energy / chill (with acoustic bonus)
+============================================================
+Profile:
+  Favorite Genre: lofi
+  Favorite Mood: chill
+  Target Energy: 0.35
+  Likes Acoustic: YES
+
+  1. Library Rain - Paper Lanterns
+     Score: 4.50
+       - +2.0 genre match (lofi)
+       - +1.0 mood match (chill)
+       - +1.00 energy match
+       - +0.5 acoustic bonus
+
+  2. Midnight Coding - LoRoom
+     Score: 4.43
+       - +2.0 genre match (lofi)
+       - +1.0 mood match (chill)
+       - +0.93 energy match
+       - +0.5 acoustic bonus
+
+  3. Focus Flow - LoRoom
+     Score: 3.45
+       - +2.0 genre match (lofi)
+       - +0.95 energy match
+       - +0.5 acoustic bonus
+
+  4. Spacewalk Thoughts - Orbit Bloom
+     Score: 2.43
+       - +1.0 mood match (chill)
+       - +0.93 energy match
+       - +0.5 acoustic bonus
+
+  5. Coffee Shop Stories - Slow Stereo
+     Score: 1.48
+       - +0.98 energy match
+       - +0.5 acoustic bonus
+
+
+============================================================
+PROFILE: 3. Different genre and mood (r&b / romantic)
+============================================================
+Profile:
+  Favorite Genre: r&b
+  Favorite Mood: romantic
+  Target Energy: 0.48
+  Likes Acoustic: NO
+
+  1. Velvet Hours - Silk Avenue
+     Score: 4.00
+       - +2.0 genre match (r&b)
+       - +1.0 mood match (romantic)
+       - +1.00 energy match
+
+  2. Dust and Diesel - Red Clay Road
+     Score: 0.96
+       - +0.96 energy match
+
+  3. Midnight Coding - LoRoom
+     Score: 0.94
+       - +0.94 energy match
+
+  4. Focus Flow - LoRoom
+     Score: 0.92
+       - +0.92 energy match
+
+  5. Island Time - Palm Riddim
+     Score: 0.92
+       - +0.92 energy match
+
+
+============================================================
+PROFILE: 4a. ADVERSARIAL: conflicting genre vs mood (metal / happy)
+============================================================
+Profile:
+  Favorite Genre: metal
+  Favorite Mood: happy
+  Target Energy: 0.9
+  Likes Acoustic: NO
+
+  1. Iron Verdict - Ashen Crown
+     Score: 2.92
+       - +2.0 genre match (metal)
+       - +0.92 energy match
+
+  2. Sunrise City - Neon Echo
+     Score: 1.92
+       - +1.0 mood match (happy)
+       - +0.92 energy match
+
+  3. Rooftop Lights - Indigo Parade
+     Score: 1.86
+       - +1.0 mood match (happy)
+       - +0.86 energy match
+
+  4. Midnight Circuit - Bassline Ghost
+     Score: 1.00
+       - +1.00 energy match
+
+  5. Storm Runner - Voltline
+     Score: 0.99
+       - +0.99 energy match
+
+
+============================================================
+PROFILE: 4b. EDGE CASE: out-of-range target_energy (1.5)
 ============================================================
 Profile:
   Favorite Genre: pop
   Favorite Mood: happy
-  Target Energy: 0.8
+  Target Energy: 1.5
   Likes Acoustic: NO
 
   1. Sunrise City - Neon Echo
-     Score: 3.98
+     Score: 3.32
        - +2.0 genre match (pop)
        - +1.0 mood match (happy)
-       - +0.98 energy match
+       - +0.32 energy match
 
   2. Gym Hero - Max Pulse
-     Score: 2.87
+     Score: 2.43
        - +2.0 genre match (pop)
-       - +0.87 energy match
+       - +0.43 energy match
 
   3. Rooftop Lights - Indigo Parade
-     Score: 1.96
+     Score: 1.26
        - +1.0 mood match (happy)
-       - +0.96 energy match
+       - +0.26 energy match
 
-  4. Groove Machine - The Funk Syndicate
-     Score: 1.00
-       - +1.00 energy match
+  4. Iron Verdict - Ashen Crown
+     Score: 0.48
+       - +0.48 energy match
 
-  5. Concrete Dreams - Cypher Lane
-     Score: 0.98
-       - +0.98 energy match
-
+  5. Voltage Rising - Pulsewave
+     Score: 0.45
+       - +0.45 energy match
 ---
 
 ## Experiments You Tried
