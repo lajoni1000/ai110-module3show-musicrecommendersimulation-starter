@@ -338,15 +338,13 @@ The experiment demonstrated that the recommender is sensitive to feature weights
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
+## Limitations and Risks
 
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+- Recommendations are limited to the songs available in the dataset.
+- The model only considers genre, mood, energy, and acoustic preference.
+- Some genres and mood combinations are underrepresented.
+- The scoring system gives more weight to genre, which may overpower other user preferences in some cases.
+- The current implementation does not validate user inputs (for example, an energy value outside the expected 0.0–1.0 range), which may produce unreliable recommendations.
 
 ---
 
